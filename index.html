@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense &amp; Budget Visualizer</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Expense &amp; Budget Visualizer</h1>
+      <div id="balance-display">
+        <span id="balance-label">Total Spent</span>
+        <span id="balance-value">0.00</span>
+      </div>
+      <button id="theme-toggle" aria-label="Switch to dark mode">☀️</button>
+    </header>
+
+    <main>
+      <section id="form-section">
+        <form id="expense-form">
+          <div class="field-group">
+            <label for="item-name">Item Name</label>
+            <input id="item-name" type="text" maxlength="100" />
+            <span class="error-msg" id="item-name-error"></span>
+          </div>
+          <div class="field-group">
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" step="0.01" />
+            <span class="error-msg" id="amount-error"></span>
+          </div>
+          <div class="field-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <!-- populated by renderCategoryOptions -->
+            </select>
+          </div>
+          <span class="error-msg" id="storage-error"></span>
+          <button type="submit">Add Expense</button>
+        </form>
+
+        <div id="category-manager">
+          <h3>Manage Categories</h3>
+          <form id="add-category-form">
+            <input id="new-category-input" type="text" maxlength="50" placeholder="New category name" />
+            <span class="error-msg" id="category-error"></span>
+            <button type="submit">Add Category</button>
+          </form>
+          <ul id="custom-category-list"></ul>
+        </div>
+      </section>
+
+      <section id="chart-section">
+        <canvas id="spending-chart"></canvas>
+        <div id="chart-placeholder" hidden>No spending data to display.</div>
+      </section>
+
+      <section id="list-section">
+        <h2>Transactions</h2>
+        <ul id="transaction-list"></ul>
+        <p id="empty-state" hidden>No expenses have been recorded.</p>
+      </section>
+
+      <section id="limit-section">
+        <h2>Spending Limits</h2>
+        <form id="add-limit-form">
+          <select id="limit-category">
+            <option value="__total__">Overall Total</option>
+            <!-- populated by renderLimitControls -->
+          </select>
+          <input id="limit-value" type="number" step="0.01" min="0.01" placeholder="Limit amount" />
+          <span class="error-msg" id="limit-error"></span>
+          <button type="submit">Set Limit</button>
+        </form>
+        <ul id="limit-list"></ul>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
